@@ -5,13 +5,19 @@
 
 - web XR API
 
-        https://developer.mozilla.org/en-US/docs/Web/API/WebXR_Device_API
+        - guide
+        
+                https://developer.mozilla.org/en-US/docs/Web/API/WebXR_Device_API
 
-        not supported by apple / safari
+                not supported by apple / safari
 
 - model viewer / google oss
 
-        https://modelviewer.dev/
+        - guide
+
+                https://modelviewer.dev/
+
+                not supported by apple / safari
 
 - ar.js
 
@@ -23,10 +29,16 @@
 
                 https://ar-js-org.github.io/AR.js-Docs/
 
+                It works on every phone with webgl and webrtc.
+
         - feature
 
-                Image / Markers Tracking
-                Location tracking
+                1. Image tracking
+                2. Location tracking
+                3. Markers tracking
+                
+                - if look for image / location tracking
+                recommend use MindAR
         
         - studio
 
@@ -39,24 +51,18 @@
                 e.g. https://ba0e-202-75-251-145.ngrok.io/ar/index.html
                 scan & play, no interaction
 
+        - 3d model
+
+                - glTF
+
         - interaction
 
-                - guide
+                https://ar-js-org.github.io/AR.js-Docs/ui-events/
 
-                        https://ar-js-org.github.io/AR.js-Docs/ui-events/
+                1. Handle clicks on AR content / A-Frame events
+                https://github.com/fcor/arjs-gestures
 
-                - A Frame (web VR framework)
-
-                        interaction is not handled by AR.js at all, it is all A-Frame based
-                        https://aframe.io/
-
-                - 2 options
-
-                        - Overlayed DOM interaction
-                        check button.html
-
-                        - interact directly with AR content
-
+                2. Interaction with Overlayed DOM content
 
 - MindAR
 
@@ -64,10 +70,14 @@
 
                 https://github.com/hiukim/mind-ar-js
 
+        - guide
+
+                https://hiukim.github.io/mind-ar-js-doc/
+
         - feature
         
-                Image tracking 
-                Face tracking
+                1. Image tracking 
+                2. Face tracking
 
         - get start
 
@@ -80,11 +90,40 @@
                 - fix
                 remove showStats: true;
 
+        - 3d model
+
+                - glTF
+                AFRAME basically supports all the standard 3D format
+
+        - interaction
+
+                https://hiukim.github.io/mind-ar-js-doc/examples/events-handling
+
+                1. AR content events / A-Frame events
+                2. some basic events
+
+        - multi targets
+
+                https://hiukim.github.io/mind-ar-js-doc/examples/multi-targets
+
+                - error
+                only 1st target can be found
+
+                - fix
+                resize two images into same size, then compile them together & download the targets.mind
+
 - 3d model
 
         - glTF
-        
-                https://github.com/KhronosGroup/glTF
+        https://github.com/KhronosGroup/glTF
+
+        - download models
+        https://sketchfab.com/3d-models/jumpboost-arrow-fad95c37aaa240e49377edcfe2552ee7
+
+- A-Frame
+
+        web VR framework
+        https://aframe.io/
 
 - VPS
 

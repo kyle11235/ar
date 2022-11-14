@@ -1,0 +1,107 @@
+
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.5/dist/mindar-image.prod.js"></script>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.5/dist/mindar-image-aframe.prod.js"></script>
+  </head>
+  <body>
+
+    <a-scene mindar-image="imageTargetSrc: ./assets/targets.mind; " color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+      <a-assets>
+        <!-- 2d asset -->
+        <!-- <img id="card" src="./assets/arrow/card.png"/> -->
+
+        <a-asset-item id="robot-asset" src="./assets/robot/scene.gltf"></a-asset-item>
+        <a-asset-item id="arrow-asset" src="./assets/arrow/scene.gltf"></a-asset-item>
+      </a-assets>
+
+
+      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+      <!-- 2d plane -->
+      <!-- <a-entity id="2d-target" mindar-image-target="targetIndex: 0">
+        <a-plane src="#card" position="0 0 0" height="0.552" width="1" rotation="0 0 0"></a-plane>
+      </a-entity> -->
+
+      <a-entity id="robot-target" mindar-image-target="targetIndex: 0">
+
+        <!-- 3d model -->
+        <a-gltf-model rotation="0 0 0" position="0 0 0.1" scale="0.005 0.005 0.005" src="#robot-asset">
+      </a-entity>
+
+      <a-entity id="arrow-target" mindar-image-target="targetIndex: 1">
+        <!-- 
+          up = 0(x), 0(y), 0(z)
+
+          out = 90 0 0
+          down = 180 0 0
+          in = 270 0 0
+
+          left = 0 0 90
+          down = 0 0 180
+          right = 0 0 270
+          
+        -->
+        <!-- 3d model -->
+        <a-gltf-model id="arrow-model" rotation="0 0 0" position="0 0 0.1" scale="0.005 0.005 0.005" src="#arrow-asset">
+      </a-entity>
+    </a-scene>
+
+    
+    <script>
+
+        const sceneEl = document.querySelector('a-scene');
+        const arSystem = sceneEl.systems["mindar-image-system"];
+        const robotTarget = document.querySelector('#robot-target');
+        const arrowTarget = document.querySelector('#arrow-target');
+        const arrowModel = document.querySelector('#arrow-model');
+
+      document.addEventListener("DOMContentLoaded", function() {
+              
+              // arReady event triggered when ready
+              sceneEl.addEventListener("arReady", (event) => {
+                console.log("MindAR is ready")
+              });
+              // arError event triggered when something went wrong. Mostly browser compatbility issue
+              sceneEl.addEventListener("arError", (event) => {
+                console.log("MindAR failed to start")
+              });
+
+
+              
+              // detect target found
+              robotTarget.addEventListener("targetFound", event => {
+                // debugger;
+                console.log("robotTarget found");
+              });
+              // detect target lost
+              robotTarget.addEventListener("targetLost", event => {
+                console.log("robotTarget lost");
+              });
+
+
+            
+              // detect target found
+              arrowTarget.addEventListener("targetFound", event => {
+                // debugger;
+                console.log("arrowTarget found");
+
+                arrowModel.object3D.rotation.set(
+                  THREE.Math.degToRad(0),
+                  THREE.Math.degToRad(0),
+                  THREE.Math.degToRad(270)
+                );
+                
+              });
+              // detect target lost
+              arrowTarget.addEventListener("targetLost", event => {
+                console.log("arrowTarget lost");
+              });
+              
+          });
+    </script>
+
+  </body>
+</html>
