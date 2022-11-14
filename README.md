@@ -125,9 +125,7 @@
         web VR framework
         https://aframe.io/
 
-- VPS
 
-        https://www.3dwxb.com/AR.html
 
 
 
